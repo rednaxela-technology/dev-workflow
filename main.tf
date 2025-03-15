@@ -45,10 +45,7 @@ terraform {
         iam_instance_profile = "3HDAmazonSSMManagedInstanceCore"
     }
 
-    root_block_device {
-        volume_size = 30
-        volume_type = "gp3"
-    }
+    
 
     tags = {
         Name = "Github-Actions-Test"
