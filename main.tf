@@ -24,9 +24,9 @@ terraform {
     }
 
     provider "aws" {
-        region = "us-east-1"
-        secret_key = ${{ secrets.GAU_343019133991_SECRET_ACCESS_KEY }}
-        access_key = ${{ secrets.GAU_343019133991_ACCESS_KEY }}
+        region     = "us-east-1"
+        access_key = var.aws_access_key
+        secret_key = var.aws_secret_key
     }    
 
     # An example resource that does nothing.
