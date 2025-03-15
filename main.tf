@@ -22,9 +22,11 @@ terraform {
         
       }
     }
+    
     provider "aws" {
         region = "us-east-1"
     }    
+
     # An example resource that does nothing.
     resource "null_resource" "example" {
       triggers = {

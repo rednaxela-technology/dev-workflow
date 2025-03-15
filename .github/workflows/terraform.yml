@@ -50,6 +50,8 @@ on:
   pull_request:
 
 env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.GAU_343019133991_ACCESS_KEY }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.GAU_343019133991_SECRET_ACCESS_KEY }}    
   AWS_REGION: "us-east-1"
 
 permissions:
