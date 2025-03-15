@@ -99,11 +99,20 @@ jobs:
 
     # Configure AWS credentials
     - name: Configure AWS Credentials
-      uses: aws-actions/configure-aws-credentials@v1.7.0
+      uses: aws-actions/configure-aws-credentials@v4
       with:
-        role-to-assume: arn:aws:iam::343019133991:role/Github-Identity-Provider-Role
-        role-session-name: Github-Identity-Provider-Session
+        role-to-assume: arn:aws:iam::343019133991:role/Github-Action-Role
+        role-session-name: Github-temporary-role-session
         aws-region: ${{ env.AWS_REGION }}
+      # Check AWS credentials file
+    - name: Check AWS credentials file
+      run: |
+        ls -la ~/.aws/ || echo "~/.aws directory doesn't exist"
+        cat ~/.aws/credentials || echo "No credentials file found"
+    
+    - name: Test AWS Credentials
+      run: |
+        aws sts get-caller-identity
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
@@ -111,12 +120,7 @@ jobs:
       with:
         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-    # Check AWS credentials file
-    - name: Check AWS credentials file
-      run: |
-        ls -la ~/.aws/ || echo "~/.aws directory doesn't exist"
-        cat ~/.aws/credentials || echo "No credentials file found"
-
+    
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
       run: terraform init
