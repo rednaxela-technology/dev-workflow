@@ -25,6 +25,10 @@ terraform {
 
     provider "aws" {
         region     = "us-east-1"
+        assume_role {
+            role_arn = "arn:aws:iam::343019133991:role/Github-Action-Role"
+            session_name = "Github-temporary-role-session"
+        }
     }    
 
     # An example resource that does nothing.
