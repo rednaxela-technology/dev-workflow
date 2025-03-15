@@ -19,9 +19,12 @@ terraform {
           source = "hashicorp/aws"
           version = "~> 5.82.2"  # Specify a version constraint
         }
+        
       }
     }
-
+    provider "aws" {
+        region = "us-east-1"
+    }    
     # An example resource that does nothing.
     resource "null_resource" "example" {
       triggers = {
