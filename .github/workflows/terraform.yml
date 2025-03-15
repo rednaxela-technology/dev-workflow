@@ -76,17 +76,16 @@ jobs:
         run: |
           aws sts get-caller-identity
 
-
-
-
-
-
-
-
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
     environment: production
+    
+    # Add AWS credentials to this job
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.GAU_343019133991_ACCESS_KEY }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.GAU_343019133991_SECRET_ACCESS_KEY }}
+      AWS_REGION: "us-east-1"
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
@@ -97,6 +96,14 @@ jobs:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v4
+
+    # Configure AWS credentials
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1.7.0
+      with:
+        aws-access-key-id: ${{ secrets.GAU_343019133991_ACCESS_KEY }}
+        aws-secret-access-key: ${{ secrets.GAU_343019133991_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.AWS_REGION }}
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform
