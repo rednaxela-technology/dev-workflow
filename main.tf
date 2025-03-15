@@ -25,8 +25,6 @@ terraform {
 
     provider "aws" {
         region     = "us-east-1"
-        access_key = var.aws_access_key
-        secret_key = var.aws_secret_key
     }    
 
     # An example resource that does nothing.
@@ -56,7 +54,7 @@ terraform {
         iam_instance_profile = "3HDAmazonSSMManagedInstanceCore"
         
         tags = {
-          Name = "Github-Actions-Test"  # This will be the name shown in AWS Console
+          Name = "Github-Actions-Test"  # yes This will be the name shown in AWS Console
         }
     }
 
