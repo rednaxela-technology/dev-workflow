@@ -110,6 +110,11 @@ jobs:
         ls -la ~/.aws/ || echo "~/.aws directory doesn't exist"
         cat ~/.aws/credentials || echo "No credentials file found"
     
+    - name: Check AWS credentials file 2
+      run: |
+        ls -la /github/workspace/.aws/ || echo "github/workspace/.aws directory doesn't exist"
+        cat /github/workspace/.aws/credentials || echo "No credentials file found"
+  
     - name: Test AWS Credentials
       run: |
         aws sts get-caller-identity
