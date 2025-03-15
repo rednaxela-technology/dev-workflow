@@ -43,13 +43,15 @@ terraform {
         associate_public_ip_address = true
         key_name = "terraform-ec2"
         iam_instance_profile = "3HDAmazonSSMManagedInstanceCore"
+        
+        tags = {
+          Name = "Github-Actions-Test"  # This will be the name shown in AWS Console
+        }
     }
 
     
 
-    tags = {
-        Name = "Github-Actions-Test"
-    }
+    
     
     
 
