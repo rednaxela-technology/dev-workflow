@@ -25,6 +25,9 @@ terraform {
 
     provider "aws" {
         region     = "us-east-1"
+        shared_credentials_files = ["~/.aws/credentials"]
+        profile = "default"
+        
         assume_role {
             role_arn = "arn:aws:iam::343019133991:role/Github-Action-Role"
             session_name = "Github-temporary-role-session"
