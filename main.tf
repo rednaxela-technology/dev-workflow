@@ -15,6 +15,10 @@ terraform {
           source = "hashicorp/null"
           version = "~> 3.0"  # Specify a version constraint
         }
+        aws = {
+          source = "hashicorp/aws"
+          version = "~> 5.82.2"  # Specify a version constraint
+        }
       }
     }
 
