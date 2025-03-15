@@ -80,7 +80,9 @@ jobs:
     name: 'Terraform'
     runs-on: ubuntu-latest
     environment: production
-    
+    permissions:
+      id-token: write
+      contents: read
     # Add AWS credentials to this job
     #env:
     #  AWS_ACCESS_KEY_ID: ${{ secrets.GAU_343019133991_ACCESS_KEY }}
