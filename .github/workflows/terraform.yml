@@ -42,7 +42,7 @@
 #       with:
 #         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-name: 'Terraform'
+name: 'AWS Authentication Check'
 
 on:
   push:
@@ -76,7 +76,7 @@ jobs:
       with:
         role-to-assume: arn:aws:iam::343019133991:role/Github-Action-Role
         role-session-name: GitHub-Actions-OIDC
-        aws-region: us-east-1
+        aws-region: ${{ env.AWS_REGION }}
     
     # Verify AWS credentials
     - name: Verify AWS credentials
