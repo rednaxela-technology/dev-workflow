@@ -84,15 +84,10 @@ jobs:
         echo "Checking AWS identity..."
         aws sts get-caller-identity
         
-        echo "Creating AWS credentials file..."
-        mkdir -p ~/.aws
-        echo "[default]" > ~/.aws/credentials
-        echo "aws_access_key_id=$(aws configure get aws_access_key_id)" >> ~/.aws/credentials
-        echo "aws_secret_access_key=$(aws configure get aws_secret_access_key)" >> ~/.aws/credentials
-        echo "aws_session_token=$(aws configure get aws_session_token)" >> ~/.aws/credentials
-        
-        echo "Credentials file created. Showing redacted version:"
-        cat ~/.aws/credentials | sed 's/.*=.*/KEY=***/'
+        echo "Verifying environment variables are set (showing only presence, not values):"
+        if [ -n "$AWS_ACCESS_KEY_ID" ]; then echo "AWS_ACCESS_KEY_ID is set"; else echo "AWS_ACCESS_KEY_ID is NOT set"; fi
+        if [ -n "$AWS_SECRET_ACCESS_KEY" ]; then echo "AWS_SECRET_ACCESS_KEY is set"; else echo "AWS_SECRET_ACCESS_KEY is NOT set"; fi
+        if [ -n "$AWS_SESSION_TOKEN" ]; then echo "AWS_SESSION_TOKEN is set"; else echo "AWS_SESSION_TOKEN is NOT set"; fi
         
         echo "Listing available AWS regions as a test:"
         aws ec2 describe-regions --query "Regions[].RegionName" --output table
