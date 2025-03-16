@@ -17,13 +17,6 @@ provider "aws" {
   # The credentials will be picked up from the environment
 }
 
-# A simple resource that does nothing
-resource "null_resource" "example" {
-  triggers = {
-    value = "A simple resource that does nothing!"
-  }
-}
-
 resource "random_id" "index" {
     byte_length = 2
 }
