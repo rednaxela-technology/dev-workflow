@@ -88,6 +88,20 @@ jobs:
         if [ -n "$AWS_ACCESS_KEY_ID" ]; then echo "AWS_ACCESS_KEY_ID is set"; else echo "AWS_ACCESS_KEY_ID is NOT set"; fi
         if [ -n "$AWS_SECRET_ACCESS_KEY" ]; then echo "AWS_SECRET_ACCESS_KEY is set"; else echo "AWS_SECRET_ACCESS_KEY is NOT set"; fi
         if [ -n "$AWS_SESSION_TOKEN" ]; then echo "AWS_SESSION_TOKEN is set"; else echo "AWS_SESSION_TOKEN is NOT set"; fi
-        
-        echo "Listing available AWS regions as a test:"
-        aws ec2 describe-regions --query "Regions[].RegionName" --output table
+    
+    # Install Terraform
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+    
+    # Initialize Terraform
+    - name: Terraform Init
+      run: terraform init
+    
+    # Terraform Plan
+    - name: Terraform Plan
+      run: terraform plan
+    
+    # Terraform Apply (only on push to main)
+    - name: Terraform Apply
+      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      run: terraform apply -auto-approve
